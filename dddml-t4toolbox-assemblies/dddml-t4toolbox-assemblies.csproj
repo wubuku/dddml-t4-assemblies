@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <RootNamespace>dddml_t4toolbox_assemblies</RootNamespace>
+  </PropertyGroup>
+  <!-- 
+  <ItemGroup>
+    <PackageReference Include="Dddml.Core" Version="0.0.1" />
+    <PackageReference Include="Dddml.Ofbiz" Version="0.0.1" />
+    <PackageReference Include="Dddml.Serialization" Version="0.0.1" />
+    <PackageReference Include="Dddml.Support.Criterion" Version="0.0.1" />
+    <PackageReference Include="Dddml.Support.NamingConventions" Version="0.0.1" />
+    <PackageReference Include="Dddml.T4" Version="0.0.1" />
+  </ItemGroup>
+  -->
+  <ItemGroup>
+    <PackageReference Include="T4Toolbox.Mono" Version="0.0.1" />
+    <!-- <PackageReference Include="Microsoft.Build" Version="17.3.2" /> -->
+    <!-- <PackageReference Include="T4Toolbox.Lites.VisualStudio.Interfaces" Version="0.0.2" />
+    <PackageReference Include="T4Toolbox.Lites.VSTextTemplating.Mono" Version="0.0.1" />
+    <PackageReference Include="T4Toolbox.DirectiveProcessors.Mono" Version="0.0.1" />
+    <PackageReference Include="T4Toolbox.EnvDteLites" Version="0.0.1" /> 
+    <PackageReference Include="T4Toolbox.Lites.VisualStudio.Mono" Version="0.0.1" />
+    -->
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\dddml-t4-assemblies\dddml-t4-assemblies.csproj" />
+  </ItemGroup>
+
+</Project>
