@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Dddml.Core" Version="0.0.1" />
     <PackageReference Include="Dddml.Ofbiz" Version="0.0.1" />
-    <PackageReference Include="Dddml.Serialization" Version="0.0.2" />
+    <PackageReference Include="Dddml.Serialization" Version="0.0.3" />
     <PackageReference Include="Dddml.Support.Criterion" Version="0.0.1" />
     <PackageReference Include="Dddml.Support.NamingConventions" Version="0.0.1" />
     <PackageReference Include="Dddml.T4" Version="0.0.1" />
