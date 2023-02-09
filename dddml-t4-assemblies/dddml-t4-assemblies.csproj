@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net45;net6.0</TargetFrameworks>
     <RootNamespace>dddml_t4_assemblies</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dddml.Core" Version="0.0.1" />
-    <PackageReference Include="Dddml.Ofbiz" Version="0.0.1" />
-    <PackageReference Include="Dddml.Serialization" Version="0.0.3" />
-    <PackageReference Include="Dddml.Support.Criterion" Version="0.0.1" />
-    <PackageReference Include="Dddml.Support.NamingConventions" Version="0.0.1" />
+    <PackageReference Include="Dddml.Core" Version="0.0.2" />
+    <PackageReference Include="Dddml.Ofbiz" Version="0.0.2" />
+    <PackageReference Include="Dddml.Serialization" Version="0.0.4" />
+    <PackageReference Include="Dddml.Support.Criterion" Version="0.0.2" />
+    <PackageReference Include="Dddml.Support.NamingConventions" Version="0.0.2" />
     <PackageReference Include="Dddml.T4" Version="0.0.1" />
   </ItemGroup>
 
