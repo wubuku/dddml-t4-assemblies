@@ -2,12 +2,13 @@
 using Dddml.Serialization;
 using Dddml.T4.Extensions;
 using T4Toolbox;
+using T4Toolbox.ForPreprocessedTemplates;
 using Microsoft.VisualStudio.TextTemplating;
 using System.Text;
 using System.Diagnostics;
 using Mono.TextTemplating;
 using Microsoft.VisualStudio.TextTemplating.VSHost;
-using System.CodeDom.Compiler;
+using System.Reflection;
 
 namespace dddml_t4toolbox_assemblies_tests;
 
@@ -39,106 +40,25 @@ public class UnitTest1
         //var host = new VisualStudioTextTemplateHost(null, null, new DefaultVariableResolver(null, null, null), null);
         var host = new Host();
         var hostContainer = new HostContainerTextTransformation(host);
-        TransformationContext.Initialize(hostContainer, hostContainer.GetInternalGenerationEnvironment());
-        
+        TransformationContext.Initialize(hostContainer, GetGenerationEnvironment(hostContainer));
+
         generator.Run();
-        
+
         TransformationContext.Cleanup();
         Debug.WriteLine(host.ContextOutputFiles);
+        Debug.WriteLine(host.Errors.HasErrors);
         host.Cleanup();
     }
 
-    public class Host : TemplateGenerator, IServiceProvider, ITextTemplatingComponents
+    private StringBuilder GetGenerationEnvironment(TextTransformation textTransformation)
     {
-        TransformationContextProvider _transformationContextProvider;
-
-        TransformationContextProvider TransformationContextProvider { get => _transformationContextProvider; }
-
-        public OutputFile[] ContextOutputFiles
+        //protected StringBuilder GenerationEnvironment
+        var prop = typeof(TextTransformation).GetProperty("GenerationEnvironment", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+        if (prop == null)
         {
-            get => TransformationContextProvider != null ? TransformationContextProvider.OutputFiles : null;
+            throw new ArgumentException("Template must have 'GenerationEnvironment' property");
         }
-
-        public Host()
-        {
-            _transformationContextProvider = new TransformationContextProvider();
-        }
-
-        public void Cleanup()
-        {
-            _transformationContextProvider.Cleanup();
-        }
-
-        object? IServiceProvider.GetService(Type serviceType)
-        {
-            if (serviceType == typeof(ITransformationContextProvider))
-            {
-                return _transformationContextProvider;
-            }
-            throw new InvalidOperationException("GetService type: " + serviceType);
-        }
-
-        ITextTemplatingEngineHost ITextTemplatingComponents.Host => throw new NotImplementedException();
-
-        object ITextTemplatingComponents.Hierarchy 
-        { 
-            get => null;//throw new NotImplementedException(); 
-            set => throw new NotImplementedException(); 
-        }
-
-        ITextTemplatingCallback ITextTemplatingComponents.Callback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        ITextTemplatingEngine ITextTemplatingComponents.Engine => throw new NotImplementedException();
-
-        string ITextTemplatingComponents.InputFile { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-    }
-
-    class TransformationContextProvider : ITransformationContextProvider
-    {
-        private OutputFile[] _outputFiles;
-
-        public OutputFile[] OutputFiles { get => _outputFiles; }
-
-        public void Cleanup() 
-        {
-            this._outputFiles = null;
-        }
-
-        string ITransformationContextProvider.GetMetadataValue(object hierarchy, string fileName, string metadataName)
-        {
-            return null;
-        }
-
-        string ITransformationContextProvider.GetPropertyValue(object hierarchy, string propertyName)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ITransformationContextProvider.UpdateOutputFiles(string inputFile, OutputFile[] outputFiles)
-        {
-            this._outputFiles = outputFiles;
-        }
-    }
-
-    class HostContainerTextTransformation : TextTransformation
-    {
-        public ITextTemplatingEngineHost Host { get; set; }
-
-        public HostContainerTextTransformation(ITextTemplatingEngineHost host) 
-        {
-            this.Host = host;
-        }
-
-        internal StringBuilder GetInternalGenerationEnvironment()
-        {
-            return GenerationEnvironment;
-        }
-
-        public override string TransformText()
-        {
-            return GenerationEnvironment.ToString();
-        }
+        return (StringBuilder)prop.GetMethod.Invoke(textTransformation, null);
     }
 
     [Fact]
