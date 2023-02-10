@@ -6,8 +6,6 @@ using T4Toolbox.ForPreprocessedTemplates;
 using Microsoft.VisualStudio.TextTemplating;
 using System.Text;
 using System.Diagnostics;
-using Mono.TextTemplating;
-using Microsoft.VisualStudio.TextTemplating.VSHost;
 using System.Reflection;
 
 namespace dddml_t4toolbox_assemblies_tests;
