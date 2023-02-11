@@ -45,6 +45,19 @@ public class UnitTest1
         TransformationContext.Cleanup();
         Debug.WriteLine(host.ContextOutputFiles);
         Debug.WriteLine(host.Errors.HasErrors);
+
+        // var originTemplate = ...
+        // var dir = Path.GetDirectoryName(originTemplate);
+        // foreach (var file in host.ContextOutputFiles)
+        // {
+        //     if (String.IsNullOrEmpty(file.Path)) 
+        //     {
+        //         continue;
+        //     }
+        //     var filePath = Path.Combine(dir, file.Path);
+        //     File.WriteAllText(filePath, file.Content.ToString());
+        // }
+
         host.Cleanup();
     }
 
